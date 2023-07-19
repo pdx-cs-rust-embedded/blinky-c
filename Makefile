@@ -6,8 +6,8 @@ CHIP = cortex-m4
 LSCRIPT = nRF52833.ld
 
 CPU = -mcpu=$(CHIP) -mthumb
-CFLAGS = -O -g -Wall -ffreestanding
-CC = arm-none-eabi-gcc
+CFLAGS = -Os -g
+CC = arm-none-eabi-gcc -Wall -ffreestanding
 AS = arm-none-eabi-as
 AR = arm-none-eabi-ar
 
@@ -29,7 +29,7 @@ all: blinky.elf
 	$(CC) $(CPU) $(CFLAGS) -S -c $< -o $@ 
 
 clean:
-	-rm -f *.o *.elf *.hex
+	-rm -f *.o *.s *.elf *.hex
 
 blinky.elf: blinky.o startup.o
 
