@@ -1,8 +1,14 @@
 # blinky-c
 Bart Massey 2023
 
-This is an attempt to build a simple blinking-lights program
-for the Micro:Bit v2 in C. I tried to adapt
-<https://github.com/Spivoxity/microbian>. So far, it
-double-faults. More interrupt vector stuff needs sorting, I
-think.
+This uses the startup code and link scripts from
+<https://github.com/Spivoxity/microbian> to run a C blinky
+on the Micro:Bit v2.
+
+To use, use the supplied `Makefile` to build `blinky.elf`,
+then
+
+    pyocd-flashtool -t nrf52 blinky.elf
+
+The `openocd.cfg` file supplied will work with OpenOCD to
+debug the program.

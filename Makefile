@@ -2,13 +2,11 @@
 # Copyright (c) 2020 J. M. Spivey
 # Heavily edited by Bart Massey 2023.
 
-BOARD = ubit-v2
 CHIP = cortex-m4
-MPX = mpx-m4
 LSCRIPT = nRF52833.ld
 
 CPU = -mcpu=$(CHIP) -mthumb
-CFLAGS = -O -g -Wall -ffreestanding -I $(BOARD)
+CFLAGS = -O -g -Wall -ffreestanding
 CC = arm-none-eabi-gcc
 AS = arm-none-eabi-as
 AR = arm-none-eabi-ar
@@ -33,6 +31,6 @@ all: blinky.elf
 clean:
 	-rm -f *.o *.elf *.hex
 
-blinky.elf: blinky.o
+blinky.elf: blinky.o startup.o
 
 blinky.o: hardware.h blinky.c
