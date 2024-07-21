@@ -8,13 +8,8 @@ LSCRIPT = nRF52833.ld
 CPU = -mcpu=$(CHIP) -mthumb
 CFLAGS = -Os -g
 CC = arm-none-eabi-gcc -Wall -ffreestanding
-AS = arm-none-eabi-as
-AR = arm-none-eabi-ar
 
 all: blinky.elf
-
-%.hex: %.elf
-	arm-none-eabi-objcopy -O ihex $< $@
 
 %.elf: %.o
 	$(CC) $(CPU) $(CFLAGS) -T $(LSCRIPT) -nostdlib $^ -lc -lgcc -o $@
@@ -22,14 +17,8 @@ all: blinky.elf
 %.o: %.c
 	$(CC) $(CPU) $(CFLAGS) -c $< -o $@ 
 
-%.o: %.s
-	$(AS) $(CPU) $< -o $@
-
-%.s: %.c
-	$(CC) $(CPU) $(CFLAGS) -S -c $< -o $@ 
-
 clean:
-	-rm -f *.o *.s *.elf *.hex
+	-rm -f *.o *.elf
 
 blinky.elf: blinky.o startup.o
 
